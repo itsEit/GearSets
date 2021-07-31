@@ -1,7 +1,11 @@
 import { parseGear } from "../utilities/GearParser";
+import GearSearch from '../components/gear/GearSearch'
 
-function Main() {
-  parseGear('SomethinHellose ')
-  return <div className="p-p-3">Hello</div>;
+function Main(props) {
+  function onSearchText(data){
+    console.log(data)
+  }
+  parseGear('parseGear')
+  return <GearSearch onSearchText={onSearchText} />;
 }
 export default Main;
