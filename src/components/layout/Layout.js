@@ -1,9 +1,9 @@
-import NavigationTop from './NavigationTop'
+import NavTop from './NavTop'
 
 function Layout(props){
   return (
     <div>
-      <NavigationTop />
+      <NavTop />
       <main>{props.children}</main>
     </div>
   )
