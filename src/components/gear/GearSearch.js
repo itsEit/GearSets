@@ -20,7 +20,11 @@ function GearSearch(props) {
     let searchArr = [];
     itemKeys.forEach((key) => {
       // @@TODO: Figure out why matrimony band breaks the loop due to undefined "en"
-      if (ffxiItems[key].category === "Armor" && key !== '15847' && key !== '15848') {
+      if (
+        ffxiItems[key].category === "Armor" &&
+        key !== "15847" &&
+        key !== "15848"
+      ) {
         let itemName = ffxiItems[key].en.toLowerCase();
         if (itemName.match(srcText)) {
           let item = {};
@@ -37,20 +41,20 @@ function GearSearch(props) {
     setFilteredItems(searchArr);
   };
 
-  const filteredItemsHandler = (event) => {
-    let srcText = String(event.query);
+  const filteredItemsHandler = (e) => {
+    let srcText = String(e.query);
     searchItems(srcText);
   };
 
-  const searchTextHandler = (e)=>{
-    setSearchText(e.value)
-    props.onSearchText(e.value)
-  }
+  const searchTextHandler = (e) => {
+    setSearchText(e.value);
+    props.onSearchText(e.value);
+  };
 
   return (
-    <div className="card">
-      <h3>Name</h3>
+    <div className="card p-p-2">
       <AutoComplete
+        placeholder="Search for Armor"
         value={searchText}
         suggestions={filteredItems}
         completeMethod={filteredItemsHandler}
