@@ -19,12 +19,7 @@ function GearSearch(props) {
     // Loops through Keys and compares Search text with the item name and pushes to array if match
     let searchArr = [];
     itemKeys.forEach((key) => {
-      // @@TODO: Figure out why matrimony band breaks the loop due to undefined "en"
-      if (
-        ffxiItems[key].category === "Armor" &&
-        key !== "15847" &&
-        key !== "15848"
-      ) {
+      if (ffxiItems[key].category === "Armor") {
         let itemName = ffxiItems[key].en.toLowerCase();
         if (itemName.match(srcText)) {
           let item = {};
@@ -33,7 +28,11 @@ function GearSearch(props) {
           item.category = ffxiItems[key].category;
           item.level = ffxiItems[key].level;
           item.slots = ffxiItems[key].slots;
-          item.desc = ffxiItemDesc[key].en;
+          if (ffxiItemDesc[key]) {
+            item.desc = ffxiItemDesc[key].en;
+          } else {
+            item.desc = "None";
+          }
           searchArr.push(item);
         }
       }
@@ -47,8 +46,12 @@ function GearSearch(props) {
   };
 
   const searchTextHandler = (e) => {
-    setSearchText(e.value);
     props.onSearchText(e.value);
+    if (e.value.id) {
+      setSearchText("");
+    } else {
+      setSearchText(e.value);
+    }
   };
 
   return (

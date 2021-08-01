@@ -1,9 +1,17 @@
 /* @@TODO: need to find a better way of overriding CCS */
 
-.p-menubar-root-list  .p-menuitem > .p-menuitem-link {
-  padding: .5rem 1rem;
+.p-menubar-root-list .p-menuitem > .p-menuitem-link {
+  padding: 0.5rem 1rem;
 }
 
-.p-inputtext{
-  padding: .25rem .25rem;
+.p-inputtext {
+  padding: 0.25rem 0.25rem;
+}
+
+.c-high-stat {
+  background-color: #80e27e;
+}
+
+.c-low-stat {
+  background-color: #f44336;
 }
