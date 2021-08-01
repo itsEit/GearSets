@@ -8,20 +8,19 @@ function Main(props) {
 
   function onSearchText(data) {
     if (data.id) {
-      const idMatch = gearList.find((item)=>item.id === data.id)
-      if(!idMatch){
-        setGearList((gearList) => [...gearList, data]);
-        parseGear("parseGear");
+      const idMatch = gearList.find((item) => item.id === data.id);
+      if (!idMatch) {
+        setGearList((gearList) => [...gearList, parseGear(data)]);
       } else {
-        alert("Duplicate")
+        alert("Duplicate");
       }
     }
   }
 
   return (
     <div className="card">
-      <GearSearch onSearchText={onSearchText} />;
-      <GearSet gearList={gearList} />
+      {/* <GearSearch onSearchText={onSearchText} />; */}
+      <GearSet gearList={gearList} onSearchText={onSearchText}/>
     </div>
   );
 }

@@ -1,10 +1,15 @@
 /* @@TODO: need to find a better way of overriding CCS */
 
+/* Override Prime Faces Formatting */
 .p-menubar-root-list .p-menuitem > .p-menuitem-link {
   padding: 0.5rem 1rem;
 }
 
 .p-inputtext {
+  padding: 0.25rem 0.25rem;
+}
+
+.p-datatable .p-datatable-header {
   padding: 0.25rem 0.25rem;
 }
 

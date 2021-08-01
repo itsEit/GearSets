@@ -3,5 +3,6 @@
     "Gridlines",
     "ffxi",
     "primereact"
-  ]
+  ],
+  "prettier.printWidth": 100
 }
