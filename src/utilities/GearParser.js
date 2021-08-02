@@ -1,4 +1,4 @@
-import { getArmorSlot } from "./GearDecoder";
+import { getArmorSlot, getJobSlot } from "./GearDecoder";
 
 export function parseGear(itemDesc) {
   let item = { ...itemDesc, descTest: itemDesc.desc };
@@ -306,8 +306,9 @@ export function parseGear(itemDesc) {
     }
   });
   gearItem.GearHaste = stat;
-  item.slotName = getArmorSlot(item.slots)
+  item.slotName = getArmorSlot(item.slots);
+  item.jobSlots = getJobSlot(item.jobs);
   item.stats = gearItem;
-  
+  console.log(item)
   return item;
 }

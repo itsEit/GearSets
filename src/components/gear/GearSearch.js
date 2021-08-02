@@ -25,6 +25,7 @@ function GearSearch(props) {
           let item = {};
           item.id = key;
           item.name = ffxiItems[key].en;
+          item.jobs = ffxiItems[key].jobs
           item.category = ffxiItems[key].category;
           item.level = ffxiItems[key].level;
           item.slots = ffxiItems[key].slots;

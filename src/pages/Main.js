@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { parseGear } from "../utilities/GearParser";
-
 import GearSet from "../components/gear/GearSet";
 
 function Main(props) {

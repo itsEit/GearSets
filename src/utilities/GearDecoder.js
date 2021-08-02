@@ -8,17 +8,25 @@ const intToBin = (int) => {
 export function getArmorSlot(slotID) {
   const bitMap = [...intToBin(slotID).toString()];
   const bitMapLength = bitMap.length;
-  let armorName = ''
-
-  console.log(bitMap,bitMapLength,slotID)
+  let armorName = "";
 
   bitMap.forEach((bit, index) => {
-    console.log(bit)
     if (bit === "1") {
       armorName = slots[bitMapLength - 1 - index].en;
-      console.log(slots[bitMapLength - 1 - index].en)
     }
   });
-  // console.log(armorName)
-  return armorName
+  return armorName;
+}
+
+export function getJobSlot(slotID) {
+  const bitMap = [...intToBin(slotID).toString()];
+  const bitMapLength = bitMap.length;
+  let jobSlotName = [];
+
+  bitMap.forEach((bit, index) => {
+    if (bit === "1") {
+      jobSlotName = [...jobSlotName,jobs[bitMapLength - 1 - index].ens]
+    }
+  });
+  return jobSlotName;
 }
