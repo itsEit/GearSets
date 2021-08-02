@@ -38,7 +38,7 @@ function GearSet(props) {
         {colVisible.isIdVisible && <Column field="id" header="ID"></Column>}
         {colVisible.isNameVisible && <Column field="name" header="Name"></Column>}
         {colVisible.isLevelVisible && <Column field="level" header="Level"></Column>}
-        {colVisible.isSlotsVisible && <Column field="slots" header="Slot"></Column>}
+        {colVisible.isSlotsVisible && <Column field="slotName" header="Slot"></Column>}
         {colVisible.isSTRVisible && <Column field="stats.STR" header="STR"></Column>}
         {colVisible.isDEXVisible && <Column field="stats.DEX" header="DEX"></Column>}
         {colVisible.isVITVisible && <Column field="stats.VIT" header="VIT"></Column>}

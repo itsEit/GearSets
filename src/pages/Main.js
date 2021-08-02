@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { parseGear } from "../utilities/GearParser";
-import GearSearch from "../components/gear/GearSearch";
+
 import GearSet from "../components/gear/GearSet";
 
 function Main(props) {
@@ -19,8 +19,7 @@ function Main(props) {
 
   return (
     <div className="card">
-      {/* <GearSearch onSearchText={onSearchText} />; */}
-      <GearSet gearList={gearList} onSearchText={onSearchText}/>
+      <GearSet gearList={gearList} onSearchText={onSearchText} />
     </div>
   );
 }

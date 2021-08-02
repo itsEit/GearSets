@@ -1,3 +1,5 @@
+import { getArmorSlot } from "./GearDecoder";
+
 export function parseGear(itemDesc) {
   let item = { ...itemDesc, descTest: itemDesc.desc };
   let gearItem = {};
@@ -304,7 +306,8 @@ export function parseGear(itemDesc) {
     }
   });
   gearItem.GearHaste = stat;
-
+  item.slotName = getArmorSlot(item.slots)
   item.stats = gearItem;
+  
   return item;
 }
