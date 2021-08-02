@@ -309,6 +309,6 @@ export function parseGear(itemDesc) {
   item.slotName = getArmorSlot(item.slots);
   item.jobSlots = getJobSlot(item.jobs);
   item.stats = gearItem;
-  console.log(item)
+
   return item;
 }
