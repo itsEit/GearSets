@@ -308,7 +308,7 @@ export function parseGear(itemDesc) {
   gearItem.GearHaste = stat;
   item.slotName = getArmorSlot(item.slots);
   item.jobSlots = getJobSlot(item.jobs);
-  item.stats = gearItem;
+  item.stats = gearItem; 
 
   return item;
 }
