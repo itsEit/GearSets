@@ -17,8 +17,12 @@ function Main(props) {
   }
 
   return (
-    <div className="card">
-      <GearSet gearList={gearList} onSearchText={onSearchText} />
+    <div className="card p-grid">
+      <div className="p-col-8">
+        <GearSet gearList={gearList} onSearchText={onSearchText} />
+      </div>
+      <div className="p-col-10">
+      </div>
     </div>
   );
 }
