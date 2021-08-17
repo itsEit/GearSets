@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { Button } from "primereact/button";
 import GearSearch from "./GearSearch";
 
 function GearSet(props) {
@@ -9,7 +10,7 @@ function GearSet(props) {
   // let headerTitle = 'Gear Sets'
 
   let colVisible = {
-    isIdVisible: true,
+    isIdVisible: false,
     isNameVisible: true,
     isLevelVisible: false,
     isSlotsVisible: true,
@@ -26,14 +27,26 @@ function GearSet(props) {
   const headerBar = (
     <div className="table-header">
       {/* <span className="p-text-center">Some Title</span> */}
-      <div align="right">
-        <GearSearch onSearchText={props.onSearchText} />
+      <div>
+        <div className="p-d-flex p-jc-between">
+          <div className="p-m-0">
+            <GearSearch onSearchText={props.onSearchText} />
+          </div>
+          <div className="p-d-flex">
+            <div className="p-m-1">
+              <Button type="button" label="Save" className="p-d-block p-mx-auto p-button-info" />
+            </div>
+            <div className="p-m-1">
+              <Button type="button" label="Delete" className="p-d-block p-mx-auto p-button-danger" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 
   return (
-    <div className="card">
+    <div className="card p-p-1">
       <DataTable value={props.gearList} header={headerBar} showGridlines>
         {colVisible.isIdVisible && <Column field="id" header="ID"></Column>}
         {colVisible.isNameVisible && <Column field="name" header="Name"></Column>}

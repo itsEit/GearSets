@@ -1,0 +1,26 @@
+.dialog-login .p-button {
+  min-width: 10rem;
+}
+
+.dialog-login p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.dialog-login .p-dialog .p-button {
+  min-width: 6rem;
+}
+
+.p-dialog .p-dialog-header {
+  border-bottom: 1px solid #e9ecef;
+  padding: 1rem;
+}
+
+.p-dialog .p-dialog-footer {
+  border-top: 1px solid #e9ecef;
+  padding: 1rem;
+}
+
+.p-dialog .p-dialog-content{
+  padding: 1rem;
+}
