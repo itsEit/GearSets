@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 import "./Login.css";
 
 const Login = (props) => {
-  const [loginDisplay, setLoginDisplay] = useState(true);
+  const [loginDisplay, setLoginDisplay] = useState(false);
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
 

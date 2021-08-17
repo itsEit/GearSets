@@ -8,3 +8,14 @@ This is a pet project about optimizing gear sets for FFXI.
 4. Clone this Repo
 5. Run npm Install
 6. Run npm start
+
+
+
+### Todo
+- [x] Refactor Gear Parse
+- [x] Update Search to use API
+- [ ] Running Total of Stats
+- [ ] Able to save Sets
+- [ ] Add login page
+- [ ] Update API call to include Token
+- [ ] Add global state
