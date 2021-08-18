@@ -29,8 +29,9 @@ function GearSet(props) {
         });
       }
     });
-    setTblOptions(options);
-  }, [props.gearList, tblOptions]);
+    setTblOptions([...options]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.gearList]);
 
   let colVisible = {
     isIdVisible: false,
@@ -63,8 +64,6 @@ function GearSet(props) {
       )
     );
   });
-
-  console.log(dynamicFilters)
 
   const headerBar = (
     <div className="table-header">
