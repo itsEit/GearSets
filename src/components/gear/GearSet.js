@@ -8,7 +8,7 @@ import "./GearSet.css";
 const GearSet = (props) => {
   const [tblOptions, setTblOptions] = useState([
     { field: "_id", header: "ID", visible: false, stat: false },
-    { field: "name", header: "Name", visible: true, stat: false , width: "30%"},
+    { field: "name", header: "Name", visible: true, stat: false, width: "30%" },
     { field: "slotName", header: "Slot", visible: true, stat: false, width: "8%" },
   ]);
 
@@ -22,7 +22,22 @@ const GearSet = (props) => {
         itemKeys.forEach((key) => {
           const fieldMatch = options.find((option) => option.field === key);
           if (!fieldMatch) {
-            options.push({ field: key, header: key, visible: true, stat: true, width: "8.5%", textAlign: "center" });
+            let header = "";
+            switch (key) {
+              case "MagicAcc":
+                header = "mAcc";
+                break;
+              case "MeleeAcc":
+                header = "Acc";
+                break;
+              case "GearHaste":
+                header = "Haste";
+                break;
+
+              default:
+                header = key;
+            }
+            options.push({ field: key, header: header, visible: true, stat: true, width: "8.5%", textAlign: "center" });
           }
         });
       }
@@ -32,19 +47,24 @@ const GearSet = (props) => {
   }, [props.gearList]);
 
   const toggleFilter = (field) => {
-    console.log(field.target.innerText);
+    const curField = field.target.innerText;
+    let updatedList = tblOptions.map((item) => {
+      if (item.field === curField) {
+        console.log("Match");
+        item.visible = !item.visible;
+      }
+      return item;
+    });
+    setTblOptions(updatedList);
+    // console.log(updatedList);
   };
 
   const dynamicFilters = tblOptions.map((item) => {
+    const selected = "p-button-sm p-button-info p-mr-1";
+    const unSelected = "p-button-sm p-button-info p-button-outlined p-mr-1";
     return (
       item.stat && (
-        <Button
-          key={item.field}
-          type="button"
-          label={item.field}
-          className="p-button-sm p-button-info p-button-outlined p-mr-1"
-          onClick={toggleFilter}
-        />
+        <Button key={item.field} type="button" label={item.field} className={item.visible ? selected : unSelected} onClick={toggleFilter} />
       )
     );
   });
@@ -77,12 +97,12 @@ const GearSet = (props) => {
     </div>
   );
 
-  const statTotals = (props) => {
+  const statTotals = (stat) => {
     const items = props.gearList;
     let stats = {};
     items.forEach((item) => {
-      if (item.stats.STR) {
-        stats.STR = (stats.STR || 0) + item.stats.STR;
+      if (item.stats[stat]) {
+        stats[stat] = (stats[stat] || 0) + item.stats[stat];
       }
     });
     return stats;
@@ -92,30 +112,19 @@ const GearSet = (props) => {
     <table className="test p-datatable-thead">
       <tfoot>
         <tr role="row">
-          <th style={{ width: "38.5%", textAlign: "right", background: "#f8f9fa" }}>
+          <th style={{ width: "38%", textAlign: "right" }}>
             <span className="p-column-title p-mr-5">Set Totals</span>
           </th>
-          <th style={{ width: "8.5%", textAlign: "center" }}>
-            <span className="p-column-title">{statTotals(props).STR}</span>
-          </th>
-          <th style={{ width: "8.5%", textAlign: "center" }}>
-            <span className="p-column-title">DEX</span>
-          </th>
-          <th style={{ width: "8.5%", textAlign: "center" }}>
-            <span className="p-column-title">VIT</span>
-          </th>
-          <th style={{ width: "8.5%", textAlign: "center" }}>
-            <span className="p-column-title">AGI</span>
-          </th>
-          <th style={{ width: "8.5%", textAlign: "center" }}>
-            <span className="p-column-title">INT</span>
-          </th>
-          <th style={{ width: "8.5%", textAlign: "center" }}>
-            <span className="p-column-title">MND</span>
-          </th>
-          <th style={{ width: "8.5%", textAlign: "center" }}>
-            <span className="p-column-title">CHR</span>
-          </th>
+          {tblOptions.map((item) => {
+            return (
+              item.visible &&
+              item.stat && (
+                <th key={item.field} style={{ width: item.width, textAlign: item.textAlign }}>
+                  <span className="p-column-title">{statTotals(item.field)[item.field]}</span>
+                </th>
+              )
+            );
+          })}
         </tr>
       </tfoot>
     </table>
