@@ -33,7 +33,6 @@ const GearSet = (props) => {
               case "GearHaste":
                 header = "Haste";
                 break;
-
               default:
                 header = key;
             }
@@ -50,13 +49,11 @@ const GearSet = (props) => {
     const curField = field.target.innerText;
     let updatedList = tblOptions.map((item) => {
       if (item.field === curField) {
-        console.log("Match");
         item.visible = !item.visible;
       }
       return item;
     });
     setTblOptions(updatedList);
-    // console.log(updatedList);
   };
 
   const dynamicFilters = tblOptions.map((item) => {
