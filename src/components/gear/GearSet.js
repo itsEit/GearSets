@@ -5,16 +5,14 @@ import { Button } from "primereact/button";
 import GearSearch from "./GearSearch";
 import "./GearSet.css";
 
-function GearSet(props) {
-  // const [isLoading, setIsLoading] = useState(false);
+const GearSet = (props) => {
   const [tblOptions, setTblOptions] = useState([
     { field: "_id", header: "ID", visible: false, stat: false },
-    { field: "name", header: "Name", visible: true, stat: false },
-    { field: "slotName", header: "Slot", visible: true, stat: false },
+    { field: "name", header: "Name", visible: true, stat: false , width: "30%"},
+    { field: "slotName", header: "Slot", visible: true, stat: false, width: "8%" },
   ]);
 
   useEffect(() => {
-    // setIsLoading(true)
     const items = props.gearList;
     let options = tblOptions;
 
@@ -24,31 +22,17 @@ function GearSet(props) {
         itemKeys.forEach((key) => {
           const fieldMatch = options.find((option) => option.field === key);
           if (!fieldMatch) {
-            options.push({ field: key, header: key, visible: false, stat: true });
+            options.push({ field: key, header: key, visible: true, stat: true, width: "8.5%", textAlign: "center" });
           }
         });
       }
     });
     setTblOptions([...options]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.gearList]);
 
-  let colVisible = {
-    isIdVisible: false,
-    isNameVisible: true,
-    isLevelVisible: false,
-    isSlotsVisible: true,
-    isSTRVisible: true,
-    isDEXVisible: true,
-    isVITVisible: true,
-    isAGIVisible: true,
-    isINTVisible: true,
-    isMNDVisible: true,
-    isCHRVisible: true,
-  };
-
   const toggleFilter = (field) => {
-    // console.log(field);
+    console.log(field.target.innerText);
   };
 
   const dynamicFilters = tblOptions.map((item) => {
@@ -59,8 +43,21 @@ function GearSet(props) {
           type="button"
           label={item.field}
           className="p-button-sm p-button-info p-button-outlined p-mr-1"
-          onClick={toggleFilter(item.field)}
+          onClick={toggleFilter}
         />
+      )
+    );
+  });
+
+  const dynamicColumns = tblOptions.map((item) => {
+    return (
+      item.visible && (
+        <Column
+          key={item.field}
+          field={item.stat ? "stats." + item.field : item.field}
+          header={item.header}
+          style={{ width: item.width, textAlign: item.textAlign }}
+        ></Column>
       )
     );
   });
@@ -134,20 +131,10 @@ function GearSet(props) {
         columnResizeMode="fit"
         className="p-datatable-sm"
       >
-        {colVisible.isIdVisible && <Column field="id" header="ID"></Column>}
-        {colVisible.isNameVisible && <Column field="name" header="Name" style={{ width: "30%" }}></Column>}
-        {colVisible.isLevelVisible && <Column field="level" header="Level"></Column>}
-        {colVisible.isSlotsVisible && <Column field="slotName" header="Slot" style={{ width: "8.5%" }}></Column>}
-        {colVisible.isSTRVisible && <Column field="stats.STR" header="GearHaste" style={{ width: "8.5%", textAlign: "center" }}></Column>}
-        {colVisible.isDEXVisible && <Column field="stats.DEX" header="GearHaste" style={{ width: "8.5%", textAlign: "center" }}></Column>}
-        {colVisible.isVITVisible && <Column field="stats.VIT" header="VIT" style={{ width: "8.5%", textAlign: "center" }}></Column>}
-        {colVisible.isAGIVisible && <Column field="stats.AGI" header="AGI" style={{ width: "8.5%", textAlign: "center" }}></Column>}
-        {colVisible.isINTVisible && <Column field="stats.INT" header="INT" style={{ width: "8.5%", textAlign: "center" }}></Column>}
-        {colVisible.isMNDVisible && <Column field="stats.MND" header="MND" style={{ width: "8.5%", textAlign: "center" }}></Column>}
-        {colVisible.isCHRVisible && <Column field="stats.CHR" header="CHR" style={{ width: "8.5%", textAlign: "center" }}></Column>}
+        {dynamicColumns}
       </DataTable>
     </div>
   );
-}
+};
 
 export default GearSet;
