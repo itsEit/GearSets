@@ -2,17 +2,30 @@ import React, { useState } from "react";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
+import { login } from "../../api/gearApi";
 import "./Login.css";
 
 const Login = (props) => {
-  const [loginDisplay, setLoginDisplay] = useState(false);
+  const [loginDisplay, setLoginDisplay] = useState(true);
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [isFormValid, setIsFormValid] = useState(true);
 
-  const [isFormValid, setIsFormValid] = useState(false);
-
-  const submitForm = () => {
-    setIsFormValid(!isFormValid);
+  const submitForm = async () => {
+    let frmData = {};
+    frmData.userName = userName;
+    frmData.userPass = userPassword;
+    const loginInfo = await login(frmData).then((res) => {
+      return res.data;
+    });
+    if (loginInfo.message === "User not Found") {
+      setIsFormValid(false);
+      return;
+    } else {
+      props.userLogin(loginInfo);
+      setIsFormValid(false);
+      setLoginDisplay(false);
+    }
   };
 
   const header = <div className="p-mt-0">Login</div>;
@@ -37,7 +50,7 @@ const Login = (props) => {
               <InputText
                 value={userName}
                 onChange={(e) => {
-                  setUserName(e.value);
+                  setUserName(e.target.value);
                 }}
                 id="username"
                 aria-describedby="username-help"
@@ -51,7 +64,7 @@ const Login = (props) => {
               <InputText
                 value={userPassword}
                 onChange={(e) => {
-                  setUserPassword(e.value);
+                  setUserPassword(e.target.value);
                 }}
                 id="password"
                 aria-describedby="password-help"
@@ -59,7 +72,9 @@ const Login = (props) => {
               />
             </div>
             <div>{formError("password")}</div>
-            <small>New User? <a href="./">Click Here to Sign up</a></small>
+            <small>
+              New User? <a href="./">Click Here to Sign up</a>
+            </small>
           </div>
         </Dialog>
       </div>

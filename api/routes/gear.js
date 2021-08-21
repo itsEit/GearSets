@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Gear = require("../models/Gear");
 
-// Get all gear items... Locked
+// Get List of Gear based on their ids
 router.get("/", async (get, res) => {
   try {
     const gear = await Gear.find({
@@ -18,6 +18,7 @@ router.get("/", async (get, res) => {
   }
 });
 
+// Get list of gear based if they have a specific stat
 router.get("/stat", async (get, res) => {
   try {
     const gear = await Gear.find({

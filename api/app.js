@@ -7,7 +7,7 @@ const app = express();
 
 app.use(cors());
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3001");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header("Access-Control-Allow-Credentials", true);
   res.header("Access-Control-Allow-Methods", "GET,POST");
   res.header(
@@ -20,8 +20,10 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json());
 
 const gearRoute = require("./routes/gear");
+const userRoute = require("./routes/user");
 
 app.use("/gear", gearRoute);
+app.use("/user", userRoute);
 
 const devEnv = true;
 const conn = devEnv ? "mongodb://localhost:27017/" : process.env.DB_CONNECTION;
@@ -39,4 +41,4 @@ mongoose.connect(
 );
 
 //Listeners
-app.listen(3000);
+app.listen(3080);

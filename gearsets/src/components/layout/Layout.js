@@ -1,14 +1,13 @@
-import NavTop from './NavTop'
-import Login from "../login/Login"
+import NavTop from "./NavTop";
 
-function Layout(props){
+function Layout(props) {
   return (
     <div>
-      <NavTop />
-      <Login />
+      <NavTop userInfo={props.userInfo} />
+
       <main>{props.children}</main>
     </div>
-  )
-} 
+  );
+}
 
 export default Layout;
