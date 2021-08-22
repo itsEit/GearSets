@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
@@ -6,10 +6,26 @@ import { login } from "../../api/gearApi";
 import "./Login.css";
 
 const Login = (props) => {
-  const [loginDisplay, setLoginDisplay] = useState(true);
+  const [loginDisplay, setLoginDisplay] = useState(false);
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [isFormValid, setIsFormValid] = useState(true);
+
+  useEffect(() => {
+    let lastDT = new Date(localStorage.getItem("gs:lastLogin")).getTime() + 3600000;
+    let currDT = new Date().getTime();
+    if (currDT < lastDT) {
+      let loginInfo = {}
+      loginInfo.userID = localStorage.getItem("gs:userID")
+      loginInfo.userName = localStorage.getItem("gs:userName")
+      props.userLogin(loginInfo)
+    } else {
+      localStorage.removeItem("gs:userID");
+      localStorage.removeItem("gs:lastLogin");
+      localStorage.removeItem("gs:userName");
+      setLoginDisplay(true);
+    }
+  }, []);
 
   const submitForm = async () => {
     let frmData = {};
@@ -23,6 +39,9 @@ const Login = (props) => {
       return;
     } else {
       props.userLogin(loginInfo);
+      localStorage.setItem("gs:userID", loginInfo.userID);
+      localStorage.setItem("gs:userName", loginInfo.userName);
+      localStorage.setItem("gs:lastLogin", new Date());
       setIsFormValid(false);
       setLoginDisplay(false);
     }
